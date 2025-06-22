@@ -1,17 +1,19 @@
 package com.cyber.financeiro.movimentacoes.entity.dto;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 public record MovimentacaoResponseDTO(
-        UUID id,
+        String usuario,
+        String categoria,
+        UUID movimentacaoId,
         String tipo,
         String descricao,
         BigDecimal valor,
-        LocalDate data,
-        LocalDateTime dataCriacao,
-        UUID categoriaId,
-        String categoriaDescricao
+        Date data,
+        Timestamp dataCriacao
 ) {}
