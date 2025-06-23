@@ -17,6 +17,7 @@ public class UsuarioController {
 
   @PostMapping
   String createUser(@RequestBody UsuarioDTO usuarioDTO) {
+    usuarioService.CreateUser(usuarioDTO);
     return "Usuario criado com sucesso";
   };
 
