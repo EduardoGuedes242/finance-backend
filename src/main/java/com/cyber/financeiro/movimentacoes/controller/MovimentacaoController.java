@@ -2,6 +2,7 @@ package com.cyber.financeiro.movimentacoes.controller;
 
 import com.cyber.financeiro.movimentacoes.entity.dto.MovimentacaoRequestDTO;
 import com.cyber.financeiro.movimentacoes.entity.dto.MovimentacaoResponseDTO;
+import com.cyber.financeiro.movimentacoes.entity.dto.TotalizadorResponseDTO;
 import com.cyber.financeiro.movimentacoes.service.MovimentacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,5 +27,10 @@ public class MovimentacaoController {
   @GetMapping
   private List<MovimentacaoResponseDTO> listaMovimentacao() {
     return movimentacaoService.listarMovimentacoesDoUsuario();
+  }
+
+  @GetMapping("/totalizador")
+  private TotalizadorResponseDTO totalizadorMovimentacao() {
+    return movimentacaoService.totalizadorMovimentacoes();
   }
 }

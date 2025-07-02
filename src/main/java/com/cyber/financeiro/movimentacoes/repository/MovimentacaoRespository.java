@@ -2,6 +2,7 @@ package com.cyber.financeiro.movimentacoes.repository;
 
 import com.cyber.financeiro.movimentacoes.entity.MovimentacoesEntity;
 import com.cyber.financeiro.movimentacoes.entity.dto.MovimentacaoResponseDTO;
+import com.cyber.financeiro.movimentacoes.entity.dto.TotalizadorResponseDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,4 +29,16 @@ public interface MovimentacaoRespository extends JpaRepository<MovimentacoesEnti
         ORDER BY m.mvt_data DESC
     """, nativeQuery = true)
   List<MovimentacaoResponseDTO> findByUsuario(@Param("usuarioId") UUID usuarioId);
+
+  @Query(value = """
+        SELECT
+                COALESCE(SUM(CASE WHEN mvt_tipo = 'despesa' THEN mvt_valor END), 0) AS despesa,
+                COALESCE(SUM(CASE WHEN mvt_tipo = 'receita' THEN mvt_valor END), 0) AS receita,
+                COALESCE(SUM(CASE WHEN mvt_tipo = 'receita' THEN mvt_valor END), 0) -
+                COALESCE(SUM(CASE WHEN mvt_tipo = 'despesa' THEN mvt_valor END), 0) AS total
+              FROM movimentacoes
+              WHERE usr_id = :usuarioId;
+    """, nativeQuery = true)
+  TotalizadorResponseDTO totalizadorSaldo(@Param("usuarioId") UUID usuarioId);
+
 }

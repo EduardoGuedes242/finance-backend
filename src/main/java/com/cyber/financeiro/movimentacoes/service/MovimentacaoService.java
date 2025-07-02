@@ -3,6 +3,7 @@ package com.cyber.financeiro.movimentacoes.service;
 import com.cyber.financeiro.movimentacoes.entity.MovimentacoesEntity;
 import com.cyber.financeiro.movimentacoes.entity.dto.MovimentacaoRequestDTO;
 import com.cyber.financeiro.movimentacoes.entity.dto.MovimentacaoResponseDTO;
+import com.cyber.financeiro.movimentacoes.entity.dto.TotalizadorResponseDTO;
 import com.cyber.financeiro.movimentacoes.repository.MovimentacaoRespository;
 import com.cyber.financeiro.usuarios.config.UsuarioLogadoHelper;
 import com.cyber.financeiro.usuarios.entity.UsuarioEntity;
@@ -43,5 +44,10 @@ public class MovimentacaoService {
   public List<MovimentacaoResponseDTO> listarMovimentacoesDoUsuario() {
     UUID usuarioId = usuarioLogadoHelper.getIdUsuarioLogado();
     return movimentacaoRespository.findByUsuario(usuarioId);
+  }
+
+  public TotalizadorResponseDTO totalizadorMovimentacoes() {
+    UUID usuarioId = usuarioLogadoHelper.getIdUsuarioLogado();
+    return movimentacaoRespository.totalizadorSaldo(usuarioId);
   }
 }

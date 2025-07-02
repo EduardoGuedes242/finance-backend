@@ -2,8 +2,6 @@ package com.cyber.financeiro.movimentacoes.entity.dto;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
